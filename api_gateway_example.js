@@ -22,22 +22,34 @@ app.post('/login', jsonParser, function (req, res, next) {
     // how to access the JSON sent by the user.
     console.log(`RECEIVED:\n${JSON.stringify(req.body, null, 2)}\n-------------------`);
 
-    axios({
-        method: 'post',
-        url: 'http://localhost:8080/api/login',
-        data: req.body
-    })
-    .then((response) => {
-        // forward the response from the api to the user
-        res.send(response.data);
-    })
-    .catch((error) => {
-        // handle error
-    })
-    .finally(() => {
-        // clean up
-    });
+    // validate the JSON before forwarding to api?    
+    if(loginRequestIsValid()){
+        // forward request
+
+        axios({
+            method: 'post',
+            url: 'http://localhost:8080/api/login',
+            data: req.body
+        })
+        .then((response) => {
+            // forward the response from the api to the user
+            res.send(response.data);
+        })
+        .catch((error) => {
+            // handle error
+        })
+        .finally(() => {
+            // clean up
+        });
+
+    } else {        
+        // do something about invalid request, maybe return error to user?
+    }
 
 })
+
+function loginRequestIsValid(json){
+    // check if is valid, return true/false
+}
 
 app.listen(process.env.PORT || 8000);
