@@ -23,7 +23,7 @@ app.post('/login', jsonParser, function (req, res, next) {
     console.log(`RECEIVED:\n${JSON.stringify(req.body, null, 2)}\n-------------------`);
 
     // validate the JSON before forwarding to api?    
-    if(loginRequestIsValid()){
+    if(loginRequestIsValid(req.body)){
         // forward request
 
         axios({
@@ -50,6 +50,7 @@ app.post('/login', jsonParser, function (req, res, next) {
 
 function loginRequestIsValid(json){
     // check if is valid, return true/false
+    return true;
 }
 
 app.listen(process.env.PORT || 8000);
