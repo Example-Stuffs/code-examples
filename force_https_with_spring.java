@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     // Useful when your program is running on an untrusted network and there is no other mechanism handling HTTP to HTTPS redirects.
+    // This example assumes your project has a valid SSL certificate and is properly configured to use it.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.portMapper().http(80).mapsTo(443);
